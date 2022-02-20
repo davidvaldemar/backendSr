@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cuscatlan.backendsr.mobile.api.auth.dto.UserSignUp;
-import com.cuscatlan.backendsr.mobile.api.business.AuthenticationBusiness;
+import com.cuscatlan.backendsr.mobile.business.AuthenticationBusiness;
 import com.cuscatlan.backendsr.mobile.security.jwt.JwtAuthenticationRequest;
 import com.cuscatlan.backendsr.mobile.security.jwt.exception.AuthenticationException;
 

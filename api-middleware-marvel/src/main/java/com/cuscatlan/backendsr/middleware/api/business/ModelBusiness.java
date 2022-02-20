@@ -27,5 +27,9 @@ public class ModelBusiness {
 	}
 	
 	
+	public TransactionLog saveLog(TransactionLog transactionLog) {
+		return reporsitory.save(transactionLog);
+	}
+	
 	
 }

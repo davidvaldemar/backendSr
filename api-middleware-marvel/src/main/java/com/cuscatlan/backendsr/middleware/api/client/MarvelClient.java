@@ -12,7 +12,9 @@ public interface MarvelClient {
 	@GetMapping("${marvel.method.get-character}")
 	public ResponseEntity<String> getCharacterByName(
 			@RequestParam(name = "name") String characterName, 
-			@RequestParam(name = "ts") String ts,
+			@RequestParam(name = "comics") String comics,
+			@RequestParam(name = "series") String series, 
+			@RequestParam(name = "ts") String ts,			
 			@RequestParam(name = "hash") String  hash, 
 			@RequestParam("apikey") String apiKey);
 	

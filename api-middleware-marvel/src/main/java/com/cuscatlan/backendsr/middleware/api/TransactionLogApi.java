@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +29,8 @@ public class TransactionLogApi {
 	
 	private final String FORMAT_DATE = "yyyy-MM-dd'T'HH:mm:ss";
 	
-	public ResponseEntity<List<TransactionLog>> getLogByUserandCriteria(@RequestParam("user") String user, @RequestParam("criteria") String criteria){
+	@GetMapping("")
+	public ResponseEntity<List<TransactionLog>> getLogByUserAndCriteria(@RequestParam("user") String user, @RequestParam("criteria") String criteria){
 		ResponseEntity<List<TransactionLog>> response =null;
 		String uuid = Utilities.getUuid();
 		try {
@@ -46,7 +50,7 @@ public class TransactionLogApi {
 		return response;
 	}
 	
-	
+	@GetMapping("/dates")
 	public ResponseEntity<List<TransactionLog>> getLogByUserAndCriteriaAndDatePeriod(
 			@RequestParam("user") String user, 
 			@RequestParam("criteria") String criteria,
@@ -68,6 +72,30 @@ public class TransactionLogApi {
 				response = new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
 		}catch(Exception e) {
+			response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			log.error("{} - Error consultando logs, {}", uuid, e.getMessage());
+		}
+		return response;
+	}
+	
+	@PostMapping(consumes = {"application/json"}, produces = {"application/json"})
+	public ResponseEntity<TransactionLog> saveTransactionLog(@RequestBody TransactionLog request){
+		ResponseEntity<TransactionLog> response =null;
+		String uuid = Utilities.getUuid();
+		try {
+			
+			
+			TransactionLog result = modelBusiness.saveLog(request);
+			
+			if(result!=null) {
+				response = new ResponseEntity<>(result, HttpStatus.OK);
+			}else {
+				log.info("{} - No se escribio log  ", uuid);
+				response = new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+			
+		}catch(Exception e) {
+			response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			log.error("{} - Error consultando logs, {}", uuid, e.getMessage());
 		}
 		return response;

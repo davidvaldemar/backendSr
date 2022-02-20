@@ -29,12 +29,14 @@ public class CharacterApi {
 	 * @return
 	 */
 	@GetMapping("")
-	public ResponseEntity<?> getCharacterByName(@RequestParam(name = "name") String name){
+	public ResponseEntity<?> getCharacterByName(@RequestParam(name = "name") String name, 
+			@RequestParam(name = "comics") String comics,
+			@RequestParam(name = "series") String series ){
 		String uuid= Utilities.getUuid();
 		ResponseEntity<?> result = null;
 		try {
 			
-			result = marvelBusiness.getCharacterByName(name, uuid);
+			result = marvelBusiness.getCharacterByName(name, comics, series, uuid);
 		}catch(Exception e) {
 			
 			log.error("Error {}", e.getMessage(),e);

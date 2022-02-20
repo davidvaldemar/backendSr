@@ -33,6 +33,8 @@ marvel:
     get-comic-by-id: /v1.0/comics/{comicId}
     get-comic-by-creator: /v1.0/creators
     get-images-all-characters: /v1.0/characters
+    post-log: /v1.0/log
+
 
 authorization: 
   jwt:

@@ -24,8 +24,8 @@ public class MarvelService {
 	public String getHash(String uuid) {
 		return Utilities.hashMd5(uuid+privateKey+publicKey);
 	}
-	public ResponseEntity<String> getCharacterbyName(String characterName, String uuid) throws Exception {
-		return marvelClient.getCharacterByName(characterName, uuid, this.getHash(uuid), publicKey);
+	public ResponseEntity<String> getCharacterbyName(String characterName, String comics, String series, String uuid) throws Exception {
+		return marvelClient.getCharacterByName(characterName, comics, series, uuid, this.getHash(uuid), publicKey);
 		
 	}
 		
