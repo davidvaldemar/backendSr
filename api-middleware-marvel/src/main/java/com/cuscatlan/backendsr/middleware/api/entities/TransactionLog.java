@@ -26,10 +26,10 @@ public class TransactionLog {
 	@Column(nullable = false, name= "api_method")
 	private String apiMethod;
 	
-	@Column(nullable = false, name= "response_code")
+	@Column(nullable = true, name= "response_code")
 	private String responseCode;
 	
-	@Column(nullable = false, name= "response_description")
+	@Column(nullable = true, name= "response_description")
 	private String responseDescription;
 	
 	@Temporal(TemporalType.TIMESTAMP)
@@ -42,6 +42,6 @@ public class TransactionLog {
 	@Column(nullable = false, name= "api")
 	private String api;
 	
-	@Column(nullable = false, name= "user")
-	private String user;
+	@Column(nullable = false, name= "username")
+	private String username;
 }

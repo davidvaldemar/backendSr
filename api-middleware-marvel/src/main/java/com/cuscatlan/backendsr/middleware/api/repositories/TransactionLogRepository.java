@@ -11,7 +11,7 @@ import com.cuscatlan.backendsr.middleware.api.entities.TransactionLog;
 @Repository
 public interface TransactionLogRepository extends CrudRepository<TransactionLog, Long> {
 
-	public List<TransactionLog> findByUserAndApiOrderByCreatedDateDesc(String user, String api);
+	public List<TransactionLog> findByUsernameAndApiOrderByCreatedDateDesc(String user, String api);
 	
-	public List<TransactionLog> findByUserAndApiAndCreatedDateBetweenOrderByCreatedDateDesc(String user, String api, Date startDate, Date endDate);
+	public List<TransactionLog> findByUsernameAndApiAndCreatedDateBetweenOrderByCreatedDateDesc(String user, String api, Date startDate, Date endDate);
 }

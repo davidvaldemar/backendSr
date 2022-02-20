@@ -21,7 +21,7 @@ spring:
         default_schema: dbo    
 
 marvel: 
-  url: http://localhost:8082
+  url: http://localhost:8081
   method:
     get-character: /v1.0/characters
     get-comic-by-name: /v1.0/comics

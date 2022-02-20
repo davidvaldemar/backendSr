@@ -17,12 +17,12 @@ public class ModelBusiness {
 	private TransactionLogRepository reporsitory;
 	
 	public List<TransactionLog> getLogByUserAndTypeSearch(String user, String api){		
-		List<TransactionLog> result = reporsitory.findByUserAndApiOrderByCreatedDateDesc(user,api);
+		List<TransactionLog> result = reporsitory.findByUsernameAndApiOrderByCreatedDateDesc(user,api);
 		return result;
 	}
 	
 	public List<TransactionLog> getLogByUserAndSearchAndPeriodDate(String user, String api, Date startDate, Date endDate){		
-		List<TransactionLog> result = reporsitory.findByUserAndApiAndCreatedDateBetweenOrderByCreatedDateDesc(user, api,startDate, endDate);
+		List<TransactionLog> result = reporsitory.findByUsernameAndApiAndCreatedDateBetweenOrderByCreatedDateDesc(user, api,startDate, endDate);
 		return result;
 	}
 	

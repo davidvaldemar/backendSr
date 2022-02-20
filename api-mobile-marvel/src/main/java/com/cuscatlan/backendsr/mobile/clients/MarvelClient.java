@@ -15,56 +15,57 @@ public interface MarvelClient {
 	
 	@GetMapping("${marvel.method.get-character}")
 	public ResponseEntity<String> getCharacterByName(
-			@RequestParam(name = "name") String characterName,
+			@RequestParam(name = "name") String name,
+			@RequestParam(name = "nameStartsWith") String nameStartsWith,			
 			@RequestParam(name = "comics") String comics, 
 			@RequestParam(name = "series") String series
 			);
 	
-	@GetMapping("${get-comic-by-name}")
+	@GetMapping("${marvel.method.get-comic-by-name}")
 	public ResponseEntity<String> getComicByTitle(
 			@RequestParam(name = "title") String title 
 			);
 	
-	@GetMapping("${get-characters-by-comic}")
+	@GetMapping("${marvel.method.get-characters-by-comic}")
 	public ResponseEntity<String> getCharactersByComicId(@PathVariable("comicId") String comicId, 
 			@RequestParam(name = "name") String characterName
 			);
 	
-	@GetMapping("${get-characters-by-serie}")
+	@GetMapping("${marvel.method.get-characters-by-serie}")
 	public ResponseEntity<String> getCharactersBySerie(@PathVariable("seriesId") String comicId, 
 			@RequestParam(name = "name") String serieName);
 	
 	
-	@GetMapping("${get-comics-by-character}") 
+	@GetMapping("${marvel.method.get-comics-by-character}") 
 	public ResponseEntity<String> getComicsByCharacterId(@PathVariable("characterId") String comicId, 
 			@RequestParam(name = "name") String characterName);
 	
 	
-	@GetMapping("${get-image-and-desc-by-character}")
+	@GetMapping("${marvel.method.get-image-and-desc-by-character}")
 	public ResponseEntity<String> getImageandDescByCharacter( 
 			@RequestParam(name = "name") String characterName
 			);
 
-	@GetMapping("${get-list-by-comic}")
+	@GetMapping("${marvel.method.get-list-by-comic}")
 	public ResponseEntity<String> getComicListByCommicName( 
 			@RequestParam(name = "name") String characterName
 			);
 	
-	@GetMapping("${get-comic-by-id}")
+	@GetMapping("${marvel.method.get-comic-by-id}")
 	public ResponseEntity<String> getComicById(@PathVariable("comicId") String comicId);
 	
-	@GetMapping("${get-comic-by-creator}")
+	@GetMapping("${marvel.method.get-comic-by-creator}")
 	public ResponseEntity<String> getComicByCreator( 
 			@RequestParam(name = "firstName") String firstName,
 			@RequestParam(name = "middleName") String middleName, 
 			@RequestParam(name = "lastName") String lastName);
 	
-	@GetMapping("${get-images-all-characters}")
+	@GetMapping("${marvel.method.get-images-all-characters}")
 	public ResponseEntity<String> getImagesAllCharacters(
 			@RequestParam("limit") int limit,
 			@RequestParam("offset") int offset);
 	
-	@GetMapping("${post-log}")
+	@GetMapping("${marvel.method.post-log}")
 	public ResponseEntity<TransactionLog> saveLog(@RequestBody  TransactionLog transactionLog);
 	
 	

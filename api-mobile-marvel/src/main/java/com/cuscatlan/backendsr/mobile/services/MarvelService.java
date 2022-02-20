@@ -1,11 +1,10 @@
 package com.cuscatlan.backendsr.mobile.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import com.cuscatlan.backendsr.lib.util.Utilities;
 import com.cuscatlan.backendsr.mobile.clients.MarvelClient;
 import com.cuscatlan.backendsr.mobile.entities.TransactionLog;
 
@@ -15,8 +14,8 @@ public class MarvelService {
 	@Autowired
 	private MarvelClient marvelClient;
 
-	public ResponseEntity<String> getCharacterByName(String characterName, String comics, String series, String uuid) throws Exception {
-		return marvelClient.getCharacterByName(characterName, comics, series);		
+	public ResponseEntity<String> getCharacterByName(String name, String nameStartsWith, String comics, String series, String uuid) throws Exception {
+		return marvelClient.getCharacterByName(name, nameStartsWith, comics, series);		
 	}
 		
 	public ResponseEntity<String> getComicByTitle(String title , String uuid) throws Exception {		

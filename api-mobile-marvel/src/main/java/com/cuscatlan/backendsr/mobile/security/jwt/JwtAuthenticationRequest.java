@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import io.swagger.annotations.ApiModelProperty;
 
-
 public class  JwtAuthenticationRequest implements Serializable {
 
     private static final long serialVersionUID = -8445943548965154778L;

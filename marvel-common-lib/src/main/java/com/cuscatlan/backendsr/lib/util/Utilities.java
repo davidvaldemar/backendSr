@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import com.cuscatlan.backendsr.lib.dto.characters.Comics;
 import com.cuscatlan.backendsr.lib.util.dto.Result;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -21,13 +22,6 @@ public class Utilities {
 	
 	public static String getUuid() {
 		return UUID.randomUUID().toString().replace("-", "");
-	}
-
-	public static String getJsonResponse(Result result, String body) {		
-		JsonObject trxResult = new JsonObject();
-		trxResult.add("transactionResult", new Gson().toJsonTree(result));
-		trxResult.add("data",JsonParser.parseString(body));			
-		return new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create().toJson(trxResult);
 	}
 	
 }

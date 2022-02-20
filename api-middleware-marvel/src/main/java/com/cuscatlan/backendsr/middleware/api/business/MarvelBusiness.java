@@ -15,10 +15,10 @@ public class MarvelBusiness {
 	@Autowired
 	private MarvelService marvelService;
 
-	public ResponseEntity<String> getCharacterByName(String characterName, String comics, String series, String uuid) throws Exception {
+	public ResponseEntity<String> getCharacterByName(String name,  String nameStartsWith,String comics, String series, String uuid) throws Exception {
 		ResponseEntity<String> response = null;
 		try {	
-			response = marvelService.getCharacterbyName(characterName, comics, series,uuid);
+			response = marvelService.getCharacterbyName(name, nameStartsWith, comics, series,uuid);
 		}catch(Exception e) {
 			log.error("{} - Error consumo de servicio, detalle: {}", uuid,e.getMessage());
 		}

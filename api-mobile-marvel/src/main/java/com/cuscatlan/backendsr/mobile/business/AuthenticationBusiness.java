@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cuscatlan.backendsr.mobile.entities.Users;
@@ -28,6 +29,9 @@ public class AuthenticationBusiness {
 	
 	@Autowired
 	private AuthenticationUtil authenticationUtil;
+	
+	@Autowired
+	PasswordEncoder encoder;
 	
 	public ResponseEntity<?> createAuthenticationToken(JwtAuthenticationRequest authenticationRequest)
 			throws UsernameNotFoundException, InvalidKeyException, UnsupportedEncodingException, NoSuchElementException {
@@ -50,11 +54,12 @@ public class AuthenticationBusiness {
 		ResponseEntity<Users> result = null;
 		Users entity = new Users();
 		entity.setUsername(usersinSignUp.getUsername());
-		entity.setPassword(usersinSignUp.getPassword());
+		entity.setPassword(encoder.encode(usersinSignUp.getPassword()));
 		entity.setStatus(true);
 		entity.setCreatedDate(new Date());
 		try{
 			Users userResult = userRepository.save(entity);
+			userResult.setPassword("********");
 			result = new ResponseEntity<>(userResult, HttpStatus.OK);
 		}catch (Exception e) {
 			result = new ResponseEntity<>(null, HttpStatus.CONFLICT);
