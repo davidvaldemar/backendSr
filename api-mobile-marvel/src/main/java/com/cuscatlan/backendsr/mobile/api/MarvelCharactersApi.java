@@ -37,7 +37,6 @@ import io.swagger.annotations.Example;
 import io.swagger.annotations.ExampleProperty;
 import lombok.extern.slf4j.Slf4j;
 
-@RefreshScope
 @RestController
 @RequestMapping("/characters")
 @Api(value = "Marvel(R) Characters API", 
