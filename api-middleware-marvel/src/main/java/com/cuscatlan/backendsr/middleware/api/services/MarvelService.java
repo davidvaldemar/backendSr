@@ -1,6 +1,5 @@
 package com.cuscatlan.backendsr.middleware.api.services;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cuscatlan.backendsr.lib.util.Utilities;
 import com.cuscatlan.backendsr.middleware.api.client.MarvelClient;
@@ -52,23 +50,6 @@ public class MarvelService {
 		return marvelClient.getComicByTitle(titleStartsWith, uuid, this.getHash(uuid), publicKey);
 	}
 	
-	public ResponseEntity<String> getCharactersByComicId(String comicId, String characterName , String uuid){
-		return marvelClient.getCharactersByComicId(comicId, characterName, uuid, this.getHash(uuid), publicKey);
-	}
-	
-	// primero validar que tenga personaje para buscar los comic asociados
-	public ResponseEntity<String> getComicsByCharacterId(String characterId, String comicName, String uuid ) throws Exception {
-		return marvelClient.getComicsByCharacterId(characterId, comicName, uuid, this.getHash(uuid), publicKey);
-	}
-	
-	public ResponseEntity<String> getImageandDescByCharacter(String characterName, String uuid) throws Exception {
-		return marvelClient.getImageandDescByCharacter(characterName,  uuid, this.getHash(uuid), publicKey);
-	}
-	
-	
-	public ResponseEntity<String> getComicListByCommicName(String comicName, String uuid) throws Exception {
-		return marvelClient.getComicListByCommicName(comicName,  uuid, this.getHash(uuid), publicKey);
-	}
 	
 	public ResponseEntity<String> getComicById(String comicId, String uuid) throws Exception {
 		return marvelClient.getComicById(comicId,  uuid, this.getHash(uuid), publicKey);
@@ -78,7 +59,4 @@ public class MarvelService {
 	return marvelClient.getComicByCreator(nameStartsWith, uuid, this.getHash(uuid), publicKey);
 	}
 	
-	public ResponseEntity<String> getImagesAllCharacters(String characterName, String uuid, int limit, int offset) throws Exception {
-		return marvelClient.getImagesAllCharacters( uuid, this.getHash(uuid), publicKey, limit, offset);
-	}
 }

@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import feign.QueryMap;
-
 @FeignClient(name = "marvel-rest", url = "${marvel.url}", configuration = FeignConfig.class)
 public interface MarvelClient {
 
@@ -30,4 +28,8 @@ public interface MarvelClient {
 			@RequestParam(name = "ts") String ts, @RequestParam(name = "hash") String hash,
 			@RequestParam("apikey") String apiKey);
 
+	@GetMapping("${get-images-all-characters}")
+	public ResponseEntity<String> getImagesAllCharacters(@RequestParam(name = "ts") String ts,
+			@RequestParam(name = "hash") String hash, @RequestParam("apikey") String apiKey,
+			@RequestParam("limit") int limit, @RequestParam("offset") int offset);
 }

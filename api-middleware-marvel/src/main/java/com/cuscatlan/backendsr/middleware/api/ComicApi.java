@@ -41,22 +41,6 @@ public class ComicApi {
 		return result;
 	}
 	
-	
-	@GetMapping("{comicId}/characters")
-	public ResponseEntity<?> getCharactersByComicId(@PathVariable("comicId") String comicId,@RequestParam(name = "name") String characterName){
-		String uuid= Utilities.getUuid();
-		ResponseEntity<?> result = null;
-		try {
-			
-			result = marvelBusiness.getCharactersByComicId(comicId,characterName,uuid);
-		}catch(Exception e) {
-			
-			log.error("Error {}", e.getMessage(),e);
-			result = new ResponseEntity<>("Error consultando API Marvel",HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return result;
-	}
-	
 	@GetMapping("{comicId}")
 	public ResponseEntity<?> getComicById(@PathVariable("comicId") String comicId){
 		String uuid= Utilities.getUuid();

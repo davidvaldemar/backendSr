@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,21 +42,6 @@ public class CharacterApi {
 		try {
 			
 			result = marvelBusiness.getCharacterByName(name, nameStartsWith, comics, series,limit,offset, uuid);
-		}catch(Exception e) {
-			
-			log.error("Error {}", e.getMessage(),e);
-			result = new ResponseEntity<>("Error consultando API Marvel",HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return result;
-	}
-	
-	@GetMapping("/characters/{characterId}/comics")
-	public ResponseEntity<?> getCharactersByComicId(@PathVariable("characterId") String characterId,@RequestParam(name = "title") String title){
-		String uuid= Utilities.getUuid();
-		ResponseEntity<?> result = null;
-		try {
-			
-			result = marvelBusiness.getComicsByCharacterId(characterId,title,uuid);
 		}catch(Exception e) {
 			
 			log.error("Error {}", e.getMessage(),e);

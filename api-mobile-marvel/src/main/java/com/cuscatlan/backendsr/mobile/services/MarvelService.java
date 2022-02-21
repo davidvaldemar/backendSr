@@ -24,24 +24,6 @@ public class MarvelService {
 		return marvelClient.getComicByTitle(title );
 	}
 	
-	public ResponseEntity<String> getCharactersByComicId(String comicId, String characterName , String uuid){
-		return marvelClient.getCharactersByComicId(comicId, characterName);
-	}
-	
-	// primero validar que tenga personaje para buscar los comic asociados
-	public ResponseEntity<String> getComicsByCharacterId(String characterId, String comicName, String uuid ) throws Exception {
-		return marvelClient.getComicsByCharacterId(characterId, comicName);
-	}
-	
-	public ResponseEntity<String> getImageandDescByCharacter(String characterName, String uuid) throws Exception {
-		return marvelClient.getImageandDescByCharacter(characterName);
-	}
-	
-	
-	public ResponseEntity<String> getComicListByCommicName(String comicName, String uuid) throws Exception {
-		return marvelClient.getComicListByCommicName(comicName);
-	}
-	
 	public ResponseEntity<String> getComicById(String comicId, String uuid) throws Exception {
 		return marvelClient.getComicById(comicId);
 	}
@@ -50,11 +32,7 @@ public class MarvelService {
 	
 	return marvelClient.getComicByCreator(nameStartsWith);
 	}
-	
-	public ResponseEntity<String> getImagesAllCharacters(String characterName, String uuid, int limit, int offset) throws Exception {
-		return marvelClient.getImagesAllCharacters(limit, offset);
-	}
-	
+
 	public ResponseEntity<TransactionLog> saveLog(TransactionLog request) {
 		return marvelClient.saveLog(request);
 	}

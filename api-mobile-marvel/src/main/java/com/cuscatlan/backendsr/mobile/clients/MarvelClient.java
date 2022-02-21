@@ -30,17 +30,6 @@ public interface MarvelClient {
 	public ResponseEntity<String> getComicByTitle(
 			@RequestParam(name = "title") String title 
 			);
-
-	
-	@GetMapping("${marvel.method.get-image-and-desc-by-character}")
-	public ResponseEntity<String> getImageandDescByCharacter( 
-			@RequestParam(name = "name") String characterName
-			);
-
-	@GetMapping("${marvel.method.get-list-by-comic}")
-	public ResponseEntity<String> getComicListByCommicName( 
-			@RequestParam(name = "name") String characterName
-			);
 	
 	@GetMapping("${marvel.method.get-comic-by-id}")
 	public ResponseEntity<String> getComicById(@PathVariable("comicId") String comicId);
@@ -48,12 +37,6 @@ public interface MarvelClient {
 	@GetMapping("${marvel.method.get-comic-by-creator}")
 	public ResponseEntity<String> getComicByCreator( 
 			@RequestParam(name = "nameStartsWith") String nameStartsWith);
-	
-	@GetMapping("${marvel.method.get-images-all-characters}")
-	public ResponseEntity<String> getImagesAllCharacters(
-			@RequestParam("limit") int limit,
-			@RequestParam("offset") int offset);
-	
 	
 	@GetMapping("${marvel.method.get-log}")
 	public ResponseEntity<List<TransactionLog>> getLogsListByUsernameCriteria(
