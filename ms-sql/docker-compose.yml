@@ -13,6 +13,7 @@ services:
       MSSQL_PID: Express
     volumes:
       - C:\Users\HP\Documents\volumes\ms-sql_data:/var/opt/mssql/data
+    restart: always 
 networks:
   default:
     external: true
