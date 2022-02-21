@@ -13,7 +13,7 @@ services:
     restart: always 
     volumes:
       - C:\Users\HP\Documents\volumes\service-discovery-marvel_data:/service-discovery-marvel/log
-
+      
   config-server-marvel:
     image: config-server-marvel:20220221.01
     build: .
