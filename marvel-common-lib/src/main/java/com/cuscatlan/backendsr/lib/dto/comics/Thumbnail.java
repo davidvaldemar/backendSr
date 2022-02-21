@@ -1,5 +1,5 @@
 
-package com.cuscatlan.backendsr.lib.dto.characters;
+package com.cuscatlan.backendsr.lib.dto.comics;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

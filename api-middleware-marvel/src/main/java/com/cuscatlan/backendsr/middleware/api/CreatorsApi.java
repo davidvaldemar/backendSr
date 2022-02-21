@@ -26,12 +26,12 @@ public class CreatorsApi {
 	 * Consulta personajes por nombre de comic para luego  obtener los personajes del comic
 	 */
 	@GetMapping()
-	public ResponseEntity<?> getComicByCreator(@RequestParam(name = "firstName") String firstName, @RequestParam(name = "middleName") String middleName, @RequestParam(name = "lastName") String lastName){
+	public ResponseEntity<?> getComicByCreator(@RequestParam(name = "nameStartsWith") String nameStartsWith){
 		String uuid= Utilities.getUuid();
 		ResponseEntity<?> result = null;
 		try {
 			
-			result = marvelBusiness.getComicByCreator(firstName, middleName, lastName, uuid);
+			result = marvelBusiness.getComicByCreator(nameStartsWith, uuid);
 		}catch(Exception e) {
 			
 			log.error("Error {}", e.getMessage(),e);

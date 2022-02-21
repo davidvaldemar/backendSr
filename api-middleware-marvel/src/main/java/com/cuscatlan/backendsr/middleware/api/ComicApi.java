@@ -32,6 +32,7 @@ public class ComicApi {
 		try {
 			
 			result = marvelBusiness.getComicByTitle(title, uuid);
+			
 		}catch(Exception e) {
 			
 			log.error("Error {}", e.getMessage(),e);
@@ -63,8 +64,7 @@ public class ComicApi {
 		try {
 			
 			result = marvelBusiness.getComicById(comicId,uuid);
-		}catch(Exception e) {
-			
+		}catch(Exception e) {			
 			log.error("Error {}", e.getMessage(),e);
 			result = new ResponseEntity<>("Error consultando API Marvel",HttpStatus.INTERNAL_SERVER_ERROR);
 		}

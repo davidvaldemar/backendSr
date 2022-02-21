@@ -1,6 +1,6 @@
-package com.cuscatlan.backendsr.lib.dto.characters.api;
+package com.cuscatlan.backendsr.lib.dto.comics.api;
 
-import com.cuscatlan.backendsr.lib.dto.characters.MarvelCharactersResponse;
+import com.cuscatlan.backendsr.lib.dto.comics.MarvelComicsResponse;
 import com.cuscatlan.backendsr.lib.util.dto.Result;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -10,10 +10,10 @@ import lombok.Data;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
     "result",
-    "result"
+    "data"
 })
 @Data
-public class CharacterByNameResponse {
- private Result result;
- private MarvelCharactersResponse data;
+public class ComicsListByTitleResponse {
+	private Result result;
+	private MarvelComicsResponse data;
 }

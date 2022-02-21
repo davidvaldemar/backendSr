@@ -30,12 +30,12 @@ public class TransactionLogApi {
 	private final String FORMAT_DATE = "yyyy-MM-dd'T'HH:mm:ss";
 	
 	@GetMapping("")
-	public ResponseEntity<List<TransactionLog>> getLogByUserAndCriteria(@RequestParam("user") String user, @RequestParam("criteria") String criteria){
+	public ResponseEntity<List<TransactionLog>> getLogByUserAndCriteria(@RequestParam(name="username", required = true) String username, @RequestParam(name="criteria", required = false) String criteria){
 		ResponseEntity<List<TransactionLog>> response =null;
 		String uuid = Utilities.getUuid();
 		try {
-			log.info("{} - Request param: {} , {}", uuid, user, criteria);
-			List<TransactionLog> result = modelBusiness.getLogByUserAndTypeSearch(user, criteria);
+			log.info("{} - Request param: {} , {}", uuid, username, criteria);
+			List<TransactionLog> result = modelBusiness.getLogByUserAndTypeSearch(username, criteria);
 		
 			if(result!=null) {
 				response = new ResponseEntity<List<TransactionLog>>(result,HttpStatus.OK);
@@ -52,7 +52,6 @@ public class TransactionLogApi {
 	
 	@GetMapping("/dates")
 	public ResponseEntity<List<TransactionLog>> getLogByUserAndCriteriaAndDatePeriod(
-			@RequestParam("user") String user, 
 			@RequestParam("criteria") String criteria,
 			@RequestParam("startDate") String startDate,
 			@RequestParam("endDate") String endDate
@@ -60,8 +59,8 @@ public class TransactionLogApi {
 		ResponseEntity<List<TransactionLog>> response =null;
 		String uuid = Utilities.getUuid();
 		try {
-			log.info("{} - Request param: {} , {}, {} , {}", uuid, user, criteria, startDate, endDate);
-			List<TransactionLog> result = modelBusiness.getLogByUserAndSearchAndPeriodDate(user, criteria,
+			log.info("{} - Request param: {} , {} , {}", uuid, criteria, startDate, endDate);
+			List<TransactionLog> result = modelBusiness.findByApiAndCreatedDateBetweenOrderByUsernameAndCreatedDateDesc(criteria,
 					DateUtil.formatStringToDate(startDate, FORMAT_DATE), DateUtil.formatStringToDate(endDate, FORMAT_DATE));
 		
 			if(result!=null) {

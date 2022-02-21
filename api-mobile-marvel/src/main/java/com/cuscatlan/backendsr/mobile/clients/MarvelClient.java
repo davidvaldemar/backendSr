@@ -1,9 +1,12 @@
 package com.cuscatlan.backendsr.mobile.clients;
 
+import java.util.List;
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,28 +21,16 @@ public interface MarvelClient {
 			@RequestParam(name = "name") String name,
 			@RequestParam(name = "nameStartsWith") String nameStartsWith,			
 			@RequestParam(name = "comics") String comics, 
-			@RequestParam(name = "series") String series
+			@RequestParam(name = "series") String series,
+			@RequestParam(name = "limit") String limit, 
+			@RequestParam(name = "offset") String offset
 			);
 	
-	@GetMapping("${marvel.method.get-comic-by-name}")
+	@GetMapping("${marvel.method.get-comic}")
 	public ResponseEntity<String> getComicByTitle(
 			@RequestParam(name = "title") String title 
 			);
-	
-	@GetMapping("${marvel.method.get-characters-by-comic}")
-	public ResponseEntity<String> getCharactersByComicId(@PathVariable("comicId") String comicId, 
-			@RequestParam(name = "name") String characterName
-			);
-	
-	@GetMapping("${marvel.method.get-characters-by-serie}")
-	public ResponseEntity<String> getCharactersBySerie(@PathVariable("seriesId") String comicId, 
-			@RequestParam(name = "name") String serieName);
-	
-	
-	@GetMapping("${marvel.method.get-comics-by-character}") 
-	public ResponseEntity<String> getComicsByCharacterId(@PathVariable("characterId") String comicId, 
-			@RequestParam(name = "name") String characterName);
-	
+
 	
 	@GetMapping("${marvel.method.get-image-and-desc-by-character}")
 	public ResponseEntity<String> getImageandDescByCharacter( 
@@ -56,17 +47,28 @@ public interface MarvelClient {
 	
 	@GetMapping("${marvel.method.get-comic-by-creator}")
 	public ResponseEntity<String> getComicByCreator( 
-			@RequestParam(name = "firstName") String firstName,
-			@RequestParam(name = "middleName") String middleName, 
-			@RequestParam(name = "lastName") String lastName);
+			@RequestParam(name = "nameStartsWith") String nameStartsWith);
 	
 	@GetMapping("${marvel.method.get-images-all-characters}")
 	public ResponseEntity<String> getImagesAllCharacters(
 			@RequestParam("limit") int limit,
 			@RequestParam("offset") int offset);
 	
-	@GetMapping("${marvel.method.post-log}")
-	public ResponseEntity<TransactionLog> saveLog(@RequestBody  TransactionLog transactionLog);
+	
+	@GetMapping("${marvel.method.get-log}")
+	public ResponseEntity<List<TransactionLog>> getLogsListByUsernameCriteria(
+			@RequestParam("username") String username,
+			@RequestParam("criteria") String  criteria);
+	
+	
+	@GetMapping("${marvel.method.get-log-dates}")
+	public ResponseEntity<List<TransactionLog>> getLogsListByUsernameCriteriaDates(
+			@RequestParam("criteria") String criteria,
+			@RequestParam("startDate") String startDate,
+			@RequestParam("endDate") String endDate);
+	
+	@PostMapping("${marvel.method.post-log}")
+	public ResponseEntity<TransactionLog> saveLog(@RequestBody TransactionLog transactionLog);
 	
 	
 }

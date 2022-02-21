@@ -1,5 +1,5 @@
 
-package com.cuscatlan.backendsr.lib.dto.characters;
+package com.cuscatlan.backendsr.lib.dto.comics;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,7 +13,7 @@ import lombok.Data;
     "extension"
 })
 @Data
-public class Thumbnail {
+public class Image {
 
     @JsonProperty("path")
     public String path;

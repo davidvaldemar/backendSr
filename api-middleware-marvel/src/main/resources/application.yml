@@ -19,20 +19,13 @@ spring:
     properties:
       hibernate: 
         default_schema: dbo    
-
 marvel: 
   url: https://gateway.marvel.com
   method:
     get-character: /v1/public/characters
-    get-comic-by-name: /v1/public/comics
-    get-characters-by-comic: /v1/public/comics/{comicId}/characters
-    get-characters-by-serie: /v1/public/series/{seriesId}/characters
-    get-comics-by-character: /v1/public/characters/{characterId}/comics
-    get-image-and-desc-by-character: /v1/public/characters
-    get-list-by-comic: /v1/public/comics
+    get-comic: /v1/public/comics
     get-comic-by-id: /v1/public/comics/{comicId}
     get-comic-by-creator: /v1/public/creators
-    get-images-all-characters: /v1/public/characters
     
   key:
     public: bfadcc42641f4a5bc6f7408a0b1c6098

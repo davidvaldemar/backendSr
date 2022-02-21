@@ -1,5 +1,5 @@
 
-package com.cuscatlan.backendsr.lib.dto.characters;
+package com.cuscatlan.backendsr.lib.dto.creators;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,15 +9,15 @@ import lombok.Data;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "path",
-    "extension"
+    "type",
+    "url"
 })
 @Data
-public class Thumbnail {
+public class Url {
 
-    @JsonProperty("path")
-    public String path;
-    @JsonProperty("extension")
-    public String extension;
+    @JsonProperty("type")
+    public String type;
+    @JsonProperty("url")
+    public String url;
 
 }

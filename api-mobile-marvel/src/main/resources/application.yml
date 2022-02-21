@@ -11,7 +11,7 @@ spring:
     password: 123456789!aA
     driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
   jpa:
-    show-sql: true
+    show-sql: false
     hibernate:  
       dialect: org.hibernate.dialect.SQLServer2012Dialect
       naming:
@@ -24,17 +24,12 @@ marvel:
   url: http://localhost:8081
   method:
     get-character: /v1.0/characters
-    get-comic-by-name: /v1.0/comics
-    get-characters-by-comic: /v1.0/comics/{comicId}/characters
-    get-characters-by-serie: /v1.0/series/{seriesId}/characters
-    get-comics-by-character: /v1.0/characters/{characterId}/comics
-    get-image-and-desc-by-character: /v1.0/characters
-    get-list-by-comic: /v1.0/comics
+    get-comic: /v1.0/comics
     get-comic-by-id: /v1.0/comics/{comicId}
     get-comic-by-creator: /v1.0/creators
-    get-images-all-characters: /v1.0/characters
     post-log: /v1.0/log
-
+    get-log: /v1.0/log
+    get-log-dates: /v1.0/log/dates
 
 authorization: 
   jwt:

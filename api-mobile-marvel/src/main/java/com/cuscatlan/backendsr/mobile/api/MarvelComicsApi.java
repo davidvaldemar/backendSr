@@ -19,12 +19,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cuscatlan.backendsr.lib.dto.characters.api.CharacterAllImageDescriptionResponse;
 import com.cuscatlan.backendsr.lib.dto.characters.api.CharacterByNameResponse;
 import com.cuscatlan.backendsr.lib.dto.characters.api.CharacterComicsListResponse;
 import com.cuscatlan.backendsr.lib.dto.characters.api.CharacterImageDescriptionResponse;
+import com.cuscatlan.backendsr.lib.dto.comics.MarvelComicsResponse;
+import com.cuscatlan.backendsr.lib.dto.comics.api.ComicsIdResponse;
+import com.cuscatlan.backendsr.lib.dto.comics.api.ComicsListByTitleResponse;
 import com.cuscatlan.backendsr.lib.util.Utilities;
-import com.cuscatlan.backendsr.mobile.business.CharactersMarvelBusiness;
+import com.cuscatlan.backendsr.mobile.business.ComicsMarvelBusiness;
 import com.cuscatlan.backendsr.mobile.security.jwt.exception.AuthenticationException;
 
 import io.swagger.annotations.Api;
@@ -32,26 +34,24 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import io.swagger.annotations.Example;
-import io.swagger.annotations.ExampleProperty;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/characters")
-@Api(value = "Marvel(R) Characters API", 
-     description = "API consultas de personajes Marvel(R)", tags = {
+@RequestMapping("/comics")
+@Api(value = "Marvel(R) Comics API", 
+     description = "API consultas de historietas Marvel(R)", tags = {
 		"", "" })
 @ApiResponses(value = { @ApiResponse(code = 200, message = "Transacción exitosa"),
 		@ApiResponse(code = 500, message = "Error interno del servidor"),
 		@ApiResponse(code=401, message = "Usuario no autorizado"),
 		@ApiResponse(code = 400, message = "Solicitud con parametros incorrectos") })
 @Slf4j
-public class MarvelCharactersApi {
+public class MarvelComicsApi {
 
 	@Autowired
-	private CharactersMarvelBusiness marvelBusiness;
+	private ComicsMarvelBusiness marvelBusiness;
 	
-	private String API = "characters"; 
+	private String API = "comics"; 
 	
 	
 	private String getUsername() {
@@ -60,21 +60,18 @@ public class MarvelCharactersApi {
 		return userDetails.getUsername();
 	}
 	
-	@ApiOperation(value = "Búsqueda por nombre de personaje", notes = "Se realiza búsqueda por inicio del nombre del personaje registrado en Marvel(R), ejemplo: \"Iron \"")
+	@ApiOperation(value = "Búsqueda por nombre de historieta", notes = "Se realiza búsqueda por inicio del nombre de la historieta registrada en Marvel(R), ejemplo: \"Adam: Legend \"")
 	@GetMapping(produces = {"application/json"} )
-	public ResponseEntity<CharacterByNameResponse> getCharacterByName(			
-			@ApiParam(value = "name", required = false, example = "Iron Man") 
-				@RequestParam(name="name", required = false) String name,
-			@ApiParam(value = "comics", required = false, example = "30092", examples= @Example(value={@ExampleProperty(value="Id de historieta, permite valores separados por coma (,)")}))
-				@RequestParam(name="comics", required = false) String comics,
-			@ApiParam(value = "series", required = false, example = "2984" , examples= @Example(value={@ExampleProperty(value="Id de serie, permite valores separados por coma (,)")}))
-				@RequestParam(name="series", required = false) String series)
+	public ResponseEntity<ComicsListByTitleResponse> getComicsListByTitle(			
+			@ApiParam(value = "title", required = true, example = "Aero (2019)") 
+				@RequestParam(name="title", required = true) String title
+			)
 			throws AuthenticationException, UsernameNotFoundException, InvalidKeyException, NoSuchElementException, 
 			UnsupportedEncodingException {
 		String uuid = Utilities.getUuid();
-		ResponseEntity<CharacterByNameResponse> result = null; 
+		ResponseEntity<ComicsListByTitleResponse> result = null; 
 		try {			
-			CharacterByNameResponse response = marvelBusiness.getCharacterByName(name, comics, series, uuid, API, this.getUsername());
+			ComicsListByTitleResponse response = marvelBusiness.getComicsListByTitle(title, uuid, API, this.getUsername());
 			result = new ResponseEntity<>(response,HttpStatus.OK);
 		}catch(Exception e) {
 			log.error("{} - Error {}", uuid,e.getMessage(),e);
@@ -89,18 +86,18 @@ public class MarvelCharactersApi {
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 	}
 	
-	@ApiOperation(value = "Listar historietas por nombre de personaje especifico", notes = "Se realiza busqueda por igualdad en el nombre del personaje registrado en Marvel(R)")
-	@GetMapping(value="/comics-list", produces = {"application/json"} )
-	public ResponseEntity<CharacterComicsListResponse> getComicListByCharacters(			
-			@ApiParam(value = "name", required = true, example = "Iron Man") 
-				@RequestParam(name="name", required = true) String name)
+	@ApiOperation(value = "Información de historieta por Id", notes = "Se realiza busqueda por Id de historieta de Marvel(R)")
+	@GetMapping(value="/detail", produces = {"application/json"} )
+	public ResponseEntity<ComicsIdResponse> getComicsById(			
+			@ApiParam(value = "comicId", required = true, example = "22942") 
+				@RequestParam(name="comicId", required = true) String comicId)
 			throws AuthenticationException, UsernameNotFoundException, InvalidKeyException, NoSuchElementException, 
 			UnsupportedEncodingException {
 		String uuid = Utilities.getUuid();
-		ResponseEntity<CharacterComicsListResponse> result = null; 
+		ResponseEntity<ComicsIdResponse> result = null; 
 		try {			
-			CharacterComicsListResponse response = marvelBusiness.getComicsByCharacter(name, uuid, API, this.getUsername());
-			result = new ResponseEntity<CharacterComicsListResponse>(response,HttpStatus.OK);
+			ComicsIdResponse response = marvelBusiness.getComicsById(comicId, uuid, API, this.getUsername());
+			result = new ResponseEntity<>(response,HttpStatus.OK);
 		}catch(Exception e) {
 			log.error("{} - Error {}", uuid,e.getMessage(),e);
 			result = new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);			
@@ -108,17 +105,17 @@ public class MarvelCharactersApi {
 		return result;
 	}
 	
+	/*
 	@ApiOperation(value = "Obtener imagen y descripcion de un personaje", notes = "Se realiza busqueda por igualdad en el nombre del personaje registrado en Marvel(R)")
-	@GetMapping(value="/image", produces = {"application/json"} )
+	@GetMapping(value="/image-description", produces = {"application/json"} )
 	public ResponseEntity<CharacterImageDescriptionResponse> getImageAndDescriptionByCharacter(			
-			@ApiParam(value = "name", required = true, example = "Iron Man") 
-				@RequestParam(name="name", required = true) String name)
+			@ApiParam(value = "name", required = false, example = "Iron Man") 
+				@RequestParam(name="name", required = false) String name)
 			throws AuthenticationException, UsernameNotFoundException, InvalidKeyException, NoSuchElementException, 
 			UnsupportedEncodingException {
 		String uuid = Utilities.getUuid();
 		ResponseEntity<CharacterImageDescriptionResponse> result = null; 
-		try {
-			
+		try {			
 			CharacterImageDescriptionResponse response = marvelBusiness.getImageAndDescriptionByCharacter(name, uuid, API, this.getUsername());
 			result = new ResponseEntity<CharacterImageDescriptionResponse>(response,HttpStatus.OK);
 		}catch(Exception e) {
@@ -127,27 +124,7 @@ public class MarvelCharactersApi {
 		}			
 		return result;
 	}
-
-	@ApiOperation(value = "Obtener imagen de personajes con paginación", notes = "Permite obtener las imagenes de todos los personajes registrados en Marvel(R) con paginación")
-	@GetMapping(value="/images-all", produces = {"application/json"} )
-	public ResponseEntity<CharacterAllImageDescriptionResponse> getImageAllCharacters(			
-			@ApiParam(value = "limit", required = true, example = "5") 
-				@RequestParam(name="limit", required = true) String limit, 
-			@ApiParam(value = "offset", required = true, example = "5") 
-				@RequestParam(name="offset", required = true) String offset)
-			throws AuthenticationException, UsernameNotFoundException, InvalidKeyException, NoSuchElementException, 
-			UnsupportedEncodingException {
-		String uuid = Utilities.getUuid();
-		ResponseEntity<CharacterAllImageDescriptionResponse> result = null; 
-		try {
-			
-			CharacterAllImageDescriptionResponse response = marvelBusiness.getImageAllCharacters(limit, offset,uuid, API, this.getUsername());
-			result = new ResponseEntity<>(response,HttpStatus.OK);
-		}catch(Exception e) {
-			log.error("{} - Error {}", uuid,e.getMessage(),e);
-			result = new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);			
-		}			
-		return result;
-	}
+	
+	*/
 
 }

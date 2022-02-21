@@ -15,10 +15,10 @@ public class MarvelBusiness {
 	@Autowired
 	private MarvelService marvelService;
 
-	public ResponseEntity<String> getCharacterByName(String name,  String nameStartsWith,String comics, String series, String uuid) throws Exception {
+	public ResponseEntity<String> getCharacterByName(String name,  String nameStartsWith,String comics, String series,String limit, String offset,  String uuid) throws Exception {
 		ResponseEntity<String> response = null;
 		try {	
-			response = marvelService.getCharacterbyName(name, nameStartsWith, comics, series,uuid);
+			response = marvelService.getCharacterbyName(name, nameStartsWith, comics, series, limit, offset,uuid);
 		}catch(Exception e) {
 			log.error("{} - Error consumo de servicio, detalle: {}", uuid,e.getMessage());
 		}
@@ -47,20 +47,7 @@ public class MarvelBusiness {
 			log.error("{} - Error consumo de servicio, detalle: {}", uuid,e.getMessage());
 		}
 		return response;
-	}
-	
-	
-	public ResponseEntity<String> getCharactersBySeriesId(String seriesId, String characterName, String uuid){
-		ResponseEntity<String> response = null;
-		
-		try {
-			response = marvelService.getCharactersBySeriesId(seriesId, characterName, uuid);
-		}catch(Exception e) {
-			log.error("{} - Error consumo de servicio, detalle: {}", uuid,e.getMessage());
-		}
-		return response;
-	}
-	
+	}	
 	
 	public ResponseEntity<String> getComicsByCharacterId(String characterId, String comicName, String uuid){
 		ResponseEntity<String> response = null;
@@ -106,11 +93,11 @@ public class MarvelBusiness {
 		return response;
 	}
 	
-	public ResponseEntity<String> getComicByCreator(String firstName, String middleName, String lastName, String uuid){
+	public ResponseEntity<String> getComicByCreator(String nameStartsWith, String uuid){
 		ResponseEntity<String> response = null;
 		
 		try {
-			response = marvelService.getComicByCreator(firstName, middleName, lastName, uuid);
+			response = marvelService.getComicByCreator(nameStartsWith, uuid);
 		}catch(Exception e) {
 			log.error("{} - Error consumo de servicio, detalle: {}", uuid,e.getMessage());
 		}
