@@ -48,7 +48,7 @@
 			"name": "1- buscar personaje por nombre",
 			"request": {
 				"url": {
-					"raw": "localhost:8082/v1.0/characters/comics-list?name=Thor",
+					"raw": "localhost:8082/v1.0/characters/?name=Thor",
 					"host": [
 						"localhost"
 					],
@@ -56,7 +56,7 @@
 					"path": [
 						"v1.0",
 						"characters",
-						"comics-list"
+						""
 					],
 					"query": [
 						{

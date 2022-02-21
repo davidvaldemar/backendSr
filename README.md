@@ -77,7 +77,17 @@ por lo que las referencias a ips cambian al nombre del servicio en las configura
 			uuid varchar(100) COLLATE SQL_Latin1_General_CP1_CI_AS NULL
 		);
 		
+	Se puede crear manualmente el siguiente registro en la tabla Users, para tener credenciales directamente para probar el API, o se puede crear uno mediante el API /signup, descrita mas adelante.
+	
+	Script de Creación de usuario: 
+	
+	-- username = admin
+	-- clave = 123456789!aA
 
+		INSERT INTO master.dbo.users (username,password,status,created_date) VALUES
+		(N'admin',N'$2a$10$k1PyH797eW.UOWQgcbZZoO.4bq1clIyJP2CVZ87OYuWTssmfHq0NK',1,'2022-02-19 15:00:00.0');
+	 
+	
 
 4 . Complicación de Artefactos. Ubicarse en cada uno de los directorios ejecutar el comando "mvn clean install", en el siguiente orden de carpetas:
 
