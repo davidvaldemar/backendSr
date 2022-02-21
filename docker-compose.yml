@@ -33,7 +33,7 @@ services:
     image: api-middleware-marvel:20220221.01
     build: .
     command: ["java", "-jar", "-Dspring.profiles.active=dev", "api-middleware-marvel.jar", "/dev/null"]
-    container_name: pi-middleware-marvel
+    container_name: api-middleware-marvel
     ports:
       - 8081:8081
     environment: 
@@ -42,7 +42,22 @@ services:
     volumes:
       - C:\Users\HP\Documents\volumes\api-middleware-marvel_data:/api-middleware-marvel/log
     depends_on:
-      - service-discovery-marvel   
+      - config-server-marvel   
+
+  api-mobile-marvel:
+    image: api-mobile-marvel:20220221.01
+    build: .
+    command: ["java", "-jar", "-Dspring.profiles.active=dev", "api-mobile-marvel.jar", "/dev/null"]
+    container_name: api-mobile-marvel
+    ports:
+      - 8082:8082
+    environment: 
+    - LOGGING_FILE=/api-mobile-marvel/log/app.log
+    restart: always 
+    volumes:
+      - C:\Users\HP\Documents\volumes\api-mobile-marvel_data:/api-mobile-marvel/log
+    depends_on:
+      - api-middleware-marvel  
       
 networks:
   default:

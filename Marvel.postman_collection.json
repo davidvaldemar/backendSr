@@ -107,7 +107,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"123456789!aA\"\n}"
+					"raw": "{\n\t\"username\": \"admin2\",\n\t\"password\": \"1234567890\"\n}"
 				},
 				"description": ""
 			},
@@ -127,7 +127,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"123456789!aA\"\n}"
+					"raw": "{\n\t\"username\": \"admin2\",\n\t\"password\": \"1234567890\"\n}"
 				},
 				"description": ""
 			},
@@ -171,46 +171,10 @@
 			"response": []
 		},
 		{
-			"name": "mobile - lista historietas por titulo",
-			"request": {
-				"url": {
-					"raw": "localhost:8082/v1.0/comics?title=Spider-Man",
-					"host": [
-						"localhost"
-					],
-					"port": "8082",
-					"path": [
-						"v1.0",
-						"comics"
-					],
-					"query": [
-						{
-							"key": "title",
-							"value": "Spider-Man",
-							"equals": true,
-							"description": ""
-						}
-					],
-					"variable": []
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}",
-						"description": ""
-					}
-				],
-				"body": {},
-				"description": ""
-			},
-			"response": []
-		},
-		{
 			"name": "4- lista historietas completas por titulo",
 			"request": {
 				"url": {
-					"raw": "localhost:8082/v1.0/comics?title=Spider-Man",
+					"raw": "localhost:8082/v1.0/comics?title=Tho",
 					"host": [
 						"localhost"
 					],
@@ -222,7 +186,7 @@
 					"query": [
 						{
 							"key": "title",
-							"value": "Spider-Man",
+							"value": "Tho",
 							"equals": true,
 							"description": ""
 						}
@@ -283,7 +247,7 @@
 			"name": "6 - busquedas de usuario",
 			"request": {
 				"url": {
-					"raw": "localhost:8082/v1.0/log?username=david.sarmiento",
+					"raw": "localhost:8082/v1.0/log?username=admin2",
 					"host": [
 						"localhost"
 					],
@@ -295,7 +259,7 @@
 					"query": [
 						{
 							"key": "username",
-							"value": "david.sarmiento",
+							"value": "admin2",
 							"equals": true,
 							"description": ""
 						}
@@ -312,48 +276,6 @@
 				],
 				"body": {},
 				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "8 - logs por usuario y tipo de busqueda",
-			"request": {
-				"url": {
-					"raw": "localhost:8082/v1.0/log?username=admin&criteria=characters",
-					"host": [
-						"localhost"
-					],
-					"port": "8082",
-					"path": [
-						"v1.0",
-						"log"
-					],
-					"query": [
-						{
-							"key": "username",
-							"value": "admin",
-							"equals": true,
-							"description": ""
-						},
-						{
-							"key": "criteria",
-							"value": "characters",
-							"equals": true,
-							"description": ""
-						}
-					],
-					"variable": []
-				},
-				"method": "GET",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer {{access_token}}",
-						"description": ""
-					}
-				],
-				"body": {},
-				"description": "criteria puede ser un valor entre: comics, creators, characters"
 			},
 			"response": []
 		},
@@ -390,6 +312,48 @@
 				],
 				"body": {},
 				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "8 - logs por usuario y tipo de busqueda",
+			"request": {
+				"url": {
+					"raw": "localhost:8082/v1.0/log?username=admin2&criteria=comics",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"v1.0",
+						"log"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "admin2",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "criteria",
+							"value": "comics",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "criteria puede ser un valor entre: comics, creators, characters"
 			},
 			"response": []
 		},
@@ -493,8 +457,9 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Basic YWRtaW46MTIzNDU2Nzg5IWFB",
-						"description": ""
+						"value": "Basic YWRtaW46MTIzNDU2Nzg5IWFBcQ==",
+						"description": "",
+						"disabled": true
 					}
 				],
 				"body": {},
