@@ -1,0 +1,33 @@
+server:
+  port: 8081
+  servlet:
+     context-path: /v1.0/
+spring:
+  application:
+    name: api-middleware-marvel
+  datasource:
+    url: jdbc:sqlserver://localhost;databaseName=master
+    username: sa
+    password: 123456789!aA
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    show-sql: true
+    hibernate:  
+      dialect: org.hibernate.dialect.SQLServer2012Dialect
+      naming:
+       physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate: 
+        default_schema: dbo    
+marvel: 
+  url: https://gateway.marvel.com
+  method:
+    get-character: /v1/public/characters
+    get-comic: /v1/public/comics
+    get-comic-by-id: /v1/public/comics/{comicId}
+    get-comic-by-creator: /v1/public/creators
+    
+  key:
+    public: bfadcc42641f4a5bc6f7408a0b1c6098
+    private: f74b60618e8fdf9550e82d5800b18da92dad69e8
+  

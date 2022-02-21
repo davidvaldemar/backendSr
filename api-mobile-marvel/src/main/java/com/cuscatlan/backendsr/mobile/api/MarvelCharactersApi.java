@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -36,6 +37,7 @@ import io.swagger.annotations.Example;
 import io.swagger.annotations.ExampleProperty;
 import lombok.extern.slf4j.Slf4j;
 
+@RefreshScope
 @RestController
 @RequestMapping("/characters")
 @Api(value = "Marvel(R) Characters API", 

@@ -1,0 +1,43 @@
+server:
+  port: 8082
+  servlet:
+     context-path: /v1.0/
+spring:
+  application:
+    name: api-mobile-marvel
+  datasource:
+    url: jdbc:sqlserver://localhost;databaseName=master
+    username: sa
+    password: 123456789!aA
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    show-sql: false
+    hibernate:  
+      dialect: org.hibernate.dialect.SQLServer2012Dialect
+      naming:
+       physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate: 
+        default_schema: dbo    
+
+marvel: 
+  url: http://localhost:8081
+  method:
+    get-character: /v1.0/characters
+    get-comic: /v1.0/comics
+    get-comic-by-id: /v1.0/comics/{comicId}
+    get-comic-by-creator: /v1.0/creators
+    post-log: /v1.0/log
+    get-log: /v1.0/log
+    get-log-dates: /v1.0/log/dates
+
+authorization: 
+  jwt:
+    application: api-mobile-marvel
+    secret: m4rv3l
+    header: Authorization
+    expiration: 3600000
+    route:
+      authentication:
+        path: /auth
+  
