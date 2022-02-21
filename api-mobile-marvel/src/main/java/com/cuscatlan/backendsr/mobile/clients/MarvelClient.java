@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.cuscatlan.backendsr.mobile.config.FeignConfig;
 import com.cuscatlan.backendsr.mobile.entities.TransactionLog;
 
-@FeignClient(name = "middleware-marvel-rest", url = "${marvel.url}", configuration = FeignConfig.class)
+@FeignClient(name = "API-MIDDLEWARE-MARVEL",// url = "${marvel.url}", 
+configuration = FeignConfig.class)
 public interface MarvelClient {
 	
 	@GetMapping("${marvel.method.get-character}")
