@@ -1,0 +1,12 @@
+FROM openjdk:14-jdk-alpine
+
+RUN apk add --no-cache tzdata
+ENV TZ CST
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+WORKDIR /config-server-marvel
+
+COPY target/config-server-marvel.jar ./
+
+EXPOSE 8888
+

@@ -1,0 +1,41 @@
+server: 
+  port: 8888
+
+spring:
+  application:
+    name: config-server-marvel
+  cloud: 
+    config:
+      server:
+        git:
+          uri: https://github.com/davidvaldemar/backendsr-properties.git
+          username: davidvaldemar@gmail.com
+          password: Valdemar13579
+          clone-on-start: true
+        bootstrap: true
+      enabled: true
+  security:
+    user:
+      name: admin
+      password: 123456789!aA
+management:
+  security:
+    enabled:true
+    
+eureka: 
+   client: 
+      serviceURL: 
+         defaultZone: http://localhost:8761/eureka
+
+logging: 
+  level:
+    com:
+      cuscatlan:
+        backendsr: INFO
+
+  file:
+    name: log/app.log
+    max: 100MB
+
+  pattern:
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] [%X{message}] %c{1}:%line - %msg%n"
