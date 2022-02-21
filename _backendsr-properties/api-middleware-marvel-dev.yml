@@ -6,7 +6,7 @@ spring:
   application:
     name: api-middleware-marvel
   datasource:
-    url: jdbc:sqlserver://localhost;databaseName=master
+    url: jdbc:sqlserver://sqlserver;databaseName=master
     username: sa
     password: 123456789!aA
     driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
@@ -34,7 +34,7 @@ marvel:
 eureka: 
    client: 
       serviceURL: 
-         defaultZone: http://localhost:8761/eureka
+         defaultZone: http://service-discovery-marvel:8761/eureka
   
 logging:
   level:

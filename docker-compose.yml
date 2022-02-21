@@ -1,15 +1,50 @@
 version: "3.1"
 
 services:
-  sqlserver:
-    image: mcr.microsoft.com/mssql/server:2019-CU3-ubuntu-18.04
-    user: '0:0'
-    container_name: sqlserver2019
+  service-discovery-marvel:
+    image: service-discovery-marvel:20220221.01
+    build: .
+    command: ["java", "-jar", "-Dspring.profiles.active=dev", "service-discovery-marvel.jar", "/dev/null"]
+    container_name: service-discovery-marvel
     ports:
-      - 1433:1433
-    environment:
-      ACCEPT_EULA: Y
-      SA_PASSWORD: 123456789!aA
-      MSSQL_PID: Express
+      - 8761:8761
+    environment: 
+    - LOGGING_FILE=/service-discovery-marvel/log/app.log
+    restart: always 
     volumes:
-      - C:\Users\HP\Documents\volumes\ms-sql_data:/var/opt/mssql/data
+      - C:\Users\HP\Documents\volumes\service-discovery-marvel_data:/service-discovery-marvel/log
+
+  config-server-marvel:
+    image: config-server-marvel:20220221.01
+    build: .
+    command: ["java", "-jar", "-Dspring.profiles.active=dev", "config-server-marvel.jar", "/dev/null"]
+    container_name: config-server-marvel
+    ports:
+      - 8888:8888
+    environment: 
+    - LOGGING_FILE=/config-server-marvel/log/app.log
+    restart: always 
+    volumes:
+      - C:\Users\HP\Documents\volumes\config-server-marvel_data:/config-server-marvel/log
+    depends_on:
+      - service-discovery-marvel
+
+  api-middleware-marvel:
+    image: api-middleware-marvel:20220221.01
+    build: .
+    command: ["java", "-jar", "-Dspring.profiles.active=dev", "api-middleware-marvel.jar", "/dev/null"]
+    container_name: pi-middleware-marvel
+    ports:
+      - 8081:8081
+    environment: 
+    - LOGGING_FILE=/api-middleware-marvel/log/app.log
+    restart: always 
+    volumes:
+      - C:\Users\HP\Documents\volumes\api-middleware-marvel_data:/api-middleware-marvel/log
+    depends_on:
+      - service-discovery-marvel   
+      
+networks:
+  default:
+    external: true
+    name: marvel-network

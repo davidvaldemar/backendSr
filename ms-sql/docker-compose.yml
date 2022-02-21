@@ -1,0 +1,19 @@
+version: "3.1"
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-CU3-ubuntu-18.04
+    user: '0:0'
+    container_name: sqlserver2019
+    ports:
+      - 1433:1433
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: 123456789!aA
+      MSSQL_PID: Express
+    volumes:
+      - C:\Users\HP\Documents\volumes\ms-sql_data:/var/opt/mssql/data
+networks:
+  default:
+    external: true
+    name: marvel-network
