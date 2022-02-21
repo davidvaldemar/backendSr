@@ -1,0 +1,506 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Marvel",
+		"_postman_id": "a7d26d0b-fc49-68bc-cbbf-a49568a3599d",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "2- listar historietas por nombre personaje",
+			"request": {
+				"url": {
+					"raw": "localhost:8082/v1.0/characters/comics-list?name=Iron Man",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"v1.0",
+						"characters",
+						"comics-list"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Iron Man",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "1- buscar personaje por nombre",
+			"request": {
+				"url": {
+					"raw": "localhost:8082/v1.0/characters/comics-list?name=Thor",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"v1.0",
+						"characters",
+						"comics-list"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Thor",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer  {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Autenticacion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"access_token\",data.access_token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "localhost:8082/v1.0/auth",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"123456789!aA\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Crear usuario",
+			"request": {
+				"url": "localhost:8082/v1.0/signup",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"123456789!aA\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "3 - buscar imagen de un personaje especifico",
+			"request": {
+				"url": {
+					"raw": "localhost:8082/v1.0/characters/image?name=Iron Man",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"v1.0",
+						"characters",
+						"image"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Iron Man",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "mobile - lista historietas por titulo",
+			"request": {
+				"url": {
+					"raw": "localhost:8082/v1.0/comics?title=Spider-Man",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"v1.0",
+						"comics"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Spider-Man",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "4- lista historietas completas por titulo",
+			"request": {
+				"url": {
+					"raw": "localhost:8082/v1.0/comics?title=Spider-Man",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"v1.0",
+						"comics"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "Spider-Man",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "5 - Información historieta por Id",
+			"request": {
+				"url": {
+					"raw": "localhost:8082/v1.0/comics/detail?comicId=59551",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"v1.0",
+						"comics",
+						"detail"
+					],
+					"query": [
+						{
+							"key": "comicId",
+							"value": "59551",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "6 - busquedas de usuario",
+			"request": {
+				"url": {
+					"raw": "localhost:8082/v1.0/log?username=david.sarmiento",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"v1.0",
+						"log"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "david.sarmiento",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "8 - logs por usuario y tipo de busqueda",
+			"request": {
+				"url": {
+					"raw": "localhost:8082/v1.0/log?username=admin&criteria=characters",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"v1.0",
+						"log"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "admin",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "criteria",
+							"value": "characters",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": "criteria puede ser un valor entre: comics, creators, characters"
+			},
+			"response": []
+		},
+		{
+			"name": "7 - Historietas por creador",
+			"request": {
+				"url": {
+					"raw": "localhost:8082/v1.0/creators?nameStartsWith=St",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"v1.0",
+						"creators"
+					],
+					"query": [
+						{
+							"key": "nameStartsWith",
+							"value": "St",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "9 - imagenes de personajes con paginado",
+			"request": {
+				"url": {
+					"raw": "localhost:8082/v1.0/characters/images-all?limit=90&offset=95",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"v1.0",
+						"characters",
+						"images-all"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "90",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "offset",
+							"value": "95",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "10 - historial de busquedas por fecha y tipo de busqueda",
+			"request": {
+				"url": {
+					"raw": "localhost:8082/v1.0/log/dates?criteria=characters&startDate=2022-02-20T18:00:00&endDate=2022-02-20T202:00:00",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"v1.0",
+						"log",
+						"dates"
+					],
+					"query": [
+						{
+							"key": "criteria",
+							"value": "characters",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "startDate",
+							"value": "2022-02-20T18:00:00",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "endDate",
+							"value": "2022-02-20T202:00:00",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "config server - detalle de propiedades",
+			"request": {
+				"url": "http://localhost:8888/api-middleware-marvel/dev",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWRtaW46MTIzNDU2Nzg5IWFB",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
